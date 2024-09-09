@@ -1,4 +1,4 @@
-const Models = [
+const  Calculators = [
     { 
       title: "Valuation Models", 
       links: [
@@ -29,5 +29,5 @@ const Models = [
     }
   ];
   
-  export default Models;
+  export default Calculators;
   
