@@ -1,3 +1,4 @@
+import Model from '../public/Models/model2.png';
 const Models = [
     { 
       title: "Valuation Models", 
@@ -23,6 +24,15 @@ const Models = [
         { name: "Margin Debt", icon: "fa-solid fa-exchange-alt" },
         { name: "VIX Fear Index", icon: "fa-solid fa-exchange-alt" },
         { name: "Junk Bond Spreads", icon: "fa-solid fa-coins" },
+       
+   
+      ]
+    },
+    { 
+      title: "", 
+      links: [
+        { name: "", image:Model  },
+    
        
    
       ]

@@ -12,18 +12,49 @@ import { Compounding } from "../menuData/Compounding";
 import { Cagr } from "../menuData/Cagr";
 import { Market } from "../menuData/Market";
 import { IncomeTax } from "../menuData/IncomeTax";
+import { Mutual } from "../menuData/Mutual";
+import Image from "next/image";
 
 function Navbar() {
   const [openIndex, setOpenIndex] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState("India");
   const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); 
+  const [openSubMenuIndex, setOpenSubMenuIndex] = useState(null);
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState({}); 
   const dropdownRef = useRef(null);
+  let mouseLeaveTimeout;
 
-  const handleMouseOver = (index) => setOpenIndex(index);
-  const handleMouseLeave = () => setOpenIndex(null);
+  
+  
+
+  const handleMouseOver = (index) => {
+    if (mouseLeaveTimeout) clearTimeout(mouseLeaveTimeout); 
+    setOpenIndex(index);
+  };
+  const handleMouseLeave = () => {
+    mouseLeaveTimeout = setTimeout(() => {
+      setOpenIndex(null); 
+    }, 200); 
+  };
+
+ 
+
+  const toggleSubMenu = (index) => {
+    setIsSubMenuOpen((prev) => ({
+      ...prev,
+      [index]: !prev[index], 
+    }));
+    setOpenSubMenuIndex(index);
+  };
+  const handleBackNavigation = () => {
+    setIsSubMenuOpen(false);
+    setOpenSubMenuIndex(null);
+  };
 
   const menuItems = [
     "Stock",
+      "Mutual Fund",
     "Infection",
     "IPO",
     "GDP",
@@ -34,6 +65,7 @@ function Navbar() {
     "CAGR",
     "Market",
     "Income Tax",
+  
   ];
 
   const menuData = [
@@ -44,6 +76,7 @@ function Navbar() {
 
   const NormalMenuData = [
     { name: "Infection", content: Infection },
+    { name: "Mutual Fund", content: Mutual },
     { name: "IPO", content: IPO },
     { name: "GDP", content: Gdp },
     { name: "Bonds", content: Bonds },
@@ -58,6 +91,11 @@ function Navbar() {
 
   const toggleCountryDropdown = () => {
     setIsCountryDropdownOpen((prev) => !prev);
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+    setIsSubMenuOpen(false);
   };
 
   useEffect(() => {
@@ -79,14 +117,16 @@ function Navbar() {
 
   return (
     <div className="fixed top-0 left-0 z-50 w-full bg-white shadow-md">
-      <main className="bg-[#F2F4F7] text-lg text-[#393c41] font-semibold pt-14 pl-[50px] pr-[10px]">
-        <ul className="flex flex-wrap items-center space-x-4 pb-11 ">
+      <main className="bg-[#F2F4F7] font-inherit text-inherit font-medium leading-inherit text-[#0C0F13] capitalize pt-12 pl-[50px] pr-[10px]">
+
+        <ul className="flex-wrap items-center hidden space-x-4 lg:flex pb-11">
           {menuItems.map((item, index) => (
             <li
               key={index}
               className="relative"
               onMouseOver={() => handleMouseOver(index)}
-              onMouseLeave={handleMouseLeave}
+              onMouseLeave={ handleMouseLeave}
+
             >
               <span className="flex items-center cursor-pointer">
                 {item}
@@ -97,7 +137,7 @@ function Navbar() {
               </span>
 
               {openIndex === index && (
-                <div className="absolute mt-2 w-[700px] bg-white text-black top-full p-1 rounded-lg shadow-lg overflow-hidden z-10">
+                <div className="absolute mt-2 w-[700px]  bg-white text-black top-full p-1 rounded-lg shadow-lg overflow-hidden z-10">
                   <hr className="w-full h-0.5 bg-blue-400 border-0 rounded "></hr>
 
                   {complexDropdownItems.includes(item) ? (
@@ -106,11 +146,11 @@ function Navbar() {
                       .map((menu, menuIndex) => (
                         <div
                           key={menuIndex}
-                          className="grid grid-cols-1 gap-4 p-4 md:grid-cols-3"
+                          className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2"
                         >
                           {menu.content.map((section, sectionIndex) => (
                             <div key={sectionIndex} className="w-full">
-                              <h4 className="mb-2 underline underline-offset-8">
+                              <h4 className="mb-2 font-medium underline decoration-blue-500 underline-offset-8">
                                 {section.title}
                               </h4>
                               <ul>
@@ -139,13 +179,17 @@ function Navbar() {
                         >
                           <ul>
                             {menu.content.map((link, linkIndex) => (
-                              <li
-                                key={linkIndex}
-                                className="flex items-center mb-2"
-                              >
-                                <i className={`${link.icon} mr-2 text-blue-600`}></i>
-                                <a className="ml-2 cursor-pointer hover:text-blue-500">{link.name}</a>
-                              </li>
+                              <li key={linkIndex} className="flex items-center mb-2">
+              {/* Conditional rendering for icon or image */}
+              {link.icon ? (
+                <i className={`${link.icon} mr-2 text-blue-600`}></i>
+              ) : (
+                <Image src={link.image} alt={link.name} className="w-6 h-6 mr-2" />
+              )}
+              <a className="ml-2 font-normal cursor-pointer hover:text-blue-500">
+                {link.name}
+              </a>
+            </li>
                             ))}
                           </ul>
                         </div>
@@ -194,6 +238,114 @@ function Navbar() {
             )}
           </div>
         </ul>
+
+        {/* Mobile Menu Toggle Button for lg (1025px and below) */}
+        <div className="flex justify-end pr-4 lg:hidden">
+  <button onClick={toggleMobileMenu} className="pb-6 text-2xl" aria-label="Toggle menu">
+    {isMobileMenuOpen ? (
+      <i className="fa-solid fa-xmark"></i> 
+    ) : (
+      <i className="fa-solid fa-bars"></i> 
+    )}
+  </button>
+</div>
+
+
+        {/* Mobile Menu Items for lg (1025px and below) */}
+        {isMobileMenuOpen && (
+          <div className="absolute top-0 left-0 w-[650px] h-[800px] overflow-y-auto p-4 bg-white shadow-lg lg:hidden">
+        
+            
+            <ul className="space-y-4">
+              {menuItems.map((item, index) => (
+                <li key={index}>
+                  <div className="flex items-center justify-between">
+                    <a className="cursor-pointer " onClick={() => toggleSubMenu(index)}>{item}</a>
+                    <i
+                      className={`ml-2 cursor-pointer fa fa-angle-down ${
+                        openSubMenuIndex === index ? "fa-angle-up" : ""
+                      }`}
+                      onClick={() => toggleSubMenu(index)}
+                    ></i>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            {/* Mobile Submenus */}
+            <div
+              className={`absolute top-0 right-0 w-full h-full bg-white shadow-lg transition-transform duration-500 transform ${
+                isSubMenuOpen[openSubMenuIndex] ? "translate-x-0" : "translate-x-full"
+              }`}
+            >
+              <div className="p-6">
+              {isSubMenuOpen && (
+                  <div className="flex items-center mb-4">
+                    <i
+                      className="text-xl cursor-pointer fa fa-angle-left"
+                      onClick={handleBackNavigation}
+                      aria-hidden="true"
+                    ></i>
+                    <h2 className="ml-4 text-xl font-bold">
+                      {menuItems[openSubMenuIndex]}
+                    </h2>
+                  </div>
+                )}
+
+
+              
+                {complexDropdownItems.includes(menuItems[openSubMenuIndex])
+                  ? menuData
+                      .filter((menu) => menu.name === menuItems[openSubMenuIndex])
+                      .map((menu, menuIndex) => (
+                        <div
+                          key={menuIndex}
+                          className="grid grid-cols-1 gap-4 p-4"
+                        >
+                          {menu.content.map((section, sectionIndex) => (
+                            <div key={sectionIndex} className="w-full">
+                              <h4 className="mb-2 underline underline-offset-5">
+                                {section.title}
+                              </h4>
+                              <ul>
+                                {section.links.map((link, linkIndex) => (
+                                  <li
+                                    key={linkIndex}
+                                    className="flex items-center mb-2 text-sm font-normal"
+                                  >
+                                    <i
+                                      className={`${link.icon} mr-2 text-blue-600 `}
+                                    ></i>
+                                    <a className="ml-2 cursor-pointer hover:text-blue-500 ">
+                                      {link.name}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      ))
+                  : normalDropdownItems.includes(menuItems[openSubMenuIndex])
+                  ? NormalMenuData.filter(
+                      (menu) => menu.name === menuItems[openSubMenuIndex]
+                    ).map((menu, menuIndex) => (
+                      <div
+                        key={menuIndex}
+                        className="grid grid-cols-1 gap-4 p-4"
+                      >
+                        {menu.content.map((link, linkIndex) => (
+                          <div key={linkIndex}>
+                            <a className="cursor-pointer">{link.name}</a>
+                          </div>
+                        ))}
+                      </div>
+                    ))
+                  : ""}
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

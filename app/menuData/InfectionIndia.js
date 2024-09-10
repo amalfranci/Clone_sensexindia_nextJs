@@ -1,4 +1,8 @@
+
+import India from '../public/Country_Flg/india.png';
+import Us from '../public/Country_Flg/Us.png';
+
 export const Infection = [
-    { name: "Inflection India", icon: "fa-solid fa-chart-line" },
-    { name: "Inflection US", icon: "fa-solid fa-chart-line" },
+    { name: "Inflection India" ,image:India},
+    { name: "Inflection US",  image:Us},
   ];

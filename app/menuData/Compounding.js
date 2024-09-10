@@ -1,4 +1,4 @@
 export const Compounding = [
-    { name: "Compounding", icon: "fa-solid fa-chart-line" },
+    { name: "Compounding", icon: "fa-solid fa-chart-area" },
     
   ];

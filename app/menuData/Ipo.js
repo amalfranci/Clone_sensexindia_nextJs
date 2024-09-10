@@ -1,4 +1,6 @@
+
+import India from '../public/Country_Flg/india.png';
 export const IPO = [
-    { name: "IPO Calender", icon: "fa-solid fa-chart-line" },
+    { name: "IPO Calender", image:India },
   ];
   

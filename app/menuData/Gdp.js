@@ -1,4 +1,7 @@
+import India from '../public/Country_Flg/india.png';
+import Us from '../public/Country_Flg/Us.png';
+
 export const Gdp = [
-    { name: "Inflection India", icon: "fa-solid fa-chart-line" },
-    { name: "Inflection US", icon: "fa-solid fa-chart-line" },
+    { name: "India GDP Growth", image:India },
+    { name: "US GDP Growth", image: Us },
   ];
