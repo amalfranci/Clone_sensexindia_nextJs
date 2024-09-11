@@ -7,66 +7,69 @@ import Twitt from '../public/Social_icons/x-twitter.png';
 
 function Footer() {
   return (
-    <footer className="m-4 bg-white">
-      <div className="w-full p-2 mx-auto max-w-screen md:flex md:items-center md:justify-between">
-        <div className="flex flex-wrap items-center justify-center space-x-1 text-gray-500 lg:space-x-3">
+    <footer className="mx-12 my-3 bg-white">
+      <div className="w-full p-2 mx-auto max-w-screen lg:flex lg:items-center lg:justify-between">
+        {/* Most Searched Section */}
+        <div className="flex flex-col items-center justify-center space-y-2 text-center text-gray-500 sm:space-y-0 sm:flex-row sm:flex-wrap sm:space-x-1 lg:space-x-3">
           <a href="#" className="text-blue-600 hover:text-gray-700">
             Most Searched:
           </a>
-          <a href="#" className="hover:text-gray-700">
-            Compounding
-          </a>
-          <span>|</span>
-          <a href="#" className="hover:text-gray-700">
-            Buffett Indicator
-          </a>
-          <span>|</span>
-          <a href="#" className="hover:text-gray-700">
-            IPO
-          </a>
-          <span>|</span>
-          <a href="#" className="hover:text-gray-700">
-            Calculators
-          </a>
+          <div className="flex flex-wrap justify-center space-x-1 sm:space-x-2 lg:space-x-3">
+            <a href="#" className="hover:text-gray-700">
+              Compounding
+            </a>
+            <span>|</span>
+            <a href="#" className="hover:text-gray-700">
+              Buffett Indicator
+            </a>
+            <span>|</span>
+            <a href="#" className="hover:text-gray-700">
+              IPO
+            </a>
+            <span>|</span>
+            <a href="#" className="hover:text-gray-700">
+              Calculators
+            </a>
+          </div>
         </div>
-        <ul className="flex flex-wrap items-center mt-3 font-medium text-md dark:text-gray-400 sm:mt-0">
-          <span className="text-lg lg:text-2xl me-4 md:me-6">Follow us</span>
-          <li>
-            <Image
-              src={Likedin}
-              width={35} 
-         
-              alt="LinkedIn"
-              className="me-4 md:me-6 sm:w-10 "
-            />
-          </li>
-          <li>
-            <Image
-              src={Insta}
-              width={35} 
+
+        {/* Follow Us Section */}
+        <ul className="flex flex-col items-center justify-center mt-4 space-y-3 text-center sm:space-y-0 sm:flex-row sm:space-x-4 lg:space-x-6 sm:mt-0">
+          <span className="text-lg font-semibold lg:text-2xl">Follow us</span>
+          <div className="flex justify-center space-x-4 sm:flex-row">
+            <li>
+              <Image
+                src={Likedin}
+            
+                alt="LinkedIn"
+                className="w-8 lg:w-9"
+              />
+            </li>
+            <li>
+              <Image
+                src={Insta}
+              
+                alt="Instagram"
+                className="w-8 lg:w-9"
+              />
+            </li>
+            <li>
+              <Image
+                src={logo}
            
-              alt="Instagram"
-              className="me-4 md:me-6 sm:w-10 "
-            />
-          </li>
-          <li>
-            <Image
-              src={logo}
-              width={35} 
-              
-              alt="Facebook"
-              className="me-4 md:me-6 sm:w-10 "
-            />
-          </li>
-          <li>
-            <Image
-              src={Twitt}
-              width={35} 
-              
-              alt="Twitter"
-              className="me-4 md:me-6 sm:w-10 "
-            />
-          </li>
+                alt="Facebook"
+                className="w-8 lg:w-9"
+              />
+            </li>
+            <li>
+              <Image
+                src={Twitt}
+             
+                alt="Twitter"
+                className="w-9 lg:w-10"
+              />
+            </li>
+          </div>
         </ul>
       </div>
     </footer>

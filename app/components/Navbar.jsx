@@ -116,9 +116,9 @@ function Navbar() {
 
   return (
     <div className="fixed top-0 left-0 z-50 w-full bg-white shadow-md ">
-      <main className="bg-[#f7f6f2] font-inherit text-inherit font-medium leading-inherit text-[#0C0F13] capitalize pt-12 pl-[50px] pr-[10px]   h-[60px] lg:h-full xl:h-full 2xl:h-full">
+      <main className="bg-[#F2F4F7] font-inherit text-inherit font-medium leading-inherit text-[#0C0F13] capitalize pt-12 pl-[50px] pr-[10px]   h-[60px] lg:h-full xl:h-full 2xl:h-full">
 
-        <ul className="flex-wrap items-center hidden space-x-4 lg:flex pb-11">
+        <ul className="flex-wrap items-center hidden space-x-3 text-lg lg:flex pb-11">
           {menuItems.map((item, index) => (
             <li
               key={index}
@@ -255,7 +255,7 @@ function Navbar() {
         {/* Mobile Menu Items for lg (1025px and below) */}
         {isMobileMenuOpen && (
     
-          <div className="absolute top-0 left-0  w-4/6  h-[800px] overflow-y-auto p-4 bg-white shadow-lg lg:hidden">
+          <div className="absolute top-0 left-0 w-5/6 h-screen p-4 overflow-x-hidden bg-white shadow-lg lg:hidden">
         
             
             <ul className="space-y-4">
@@ -270,8 +270,47 @@ function Navbar() {
                       onClick={() => toggleSubMenu(index)}
                     ></i>
                   </div>
+                  
                 </li>
+                
               ))}
+              <div ref={dropdownRef} className="relative font-sans w-max">
+                <button
+                  type="button"
+                  onClick={toggleCountryDropdown}
+                  className="py-1 pr-2 pl-1 rounded text-[#333] text-sm font-semibold border-2 outline-none hover:bg-blue-50 flex items-center"
+                >
+                  <img
+                    src={`https://readymadeui.com/${selectedCountry.toLowerCase()}_flag.webp`}
+                    alt={selectedCountry}
+                    className="w-5 mr-1"
+                  />
+                  {selectedCountry}
+                  <i className="ml-12 text-blue-500 fa fa-angle-down"></i>
+                </button>
+
+                {isCountryDropdownOpen && (
+                  <ul className="absolute shadow-lg bg-white py-2 px-2 z-[1000] min-w-full w-max rounded max-h-96 overflow-auto">
+                    {["USA", "UK", "India", "Singapore"].map((country) => (
+                      <li
+                        key={country}
+                        onClick={() => handleCountrySelect(country)}
+                        className="py-2.5 px-4 hover:bg-blue-50 rounded text-black text-sm cursor-pointer"
+                      >
+                        <div className="flex items-center">
+                          <img
+                            src={`https://readymadeui.com/${country.toLowerCase()}_flag.webp`}
+                            className="w-6 mr-3"
+                            alt={country}
+                          />
+                          {country}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              
             </ul>
 
             {/* Mobile Submenus */}
@@ -280,7 +319,7 @@ function Navbar() {
     isSubMenuOpen[openSubMenuIndex] ? "translate-x-0" : "translate-x-full"
   }`}
 >
-  <div className="p-6 h-[90vh] overflow-y-auto"> {/* Updated styles */}
+  <div className="p-6 h-[90vh] overflow-x-hidden  overflow-y-auto"> {/* Updated styles */}
     {isSubMenuOpen && (
       <div className="flex items-center mb-4">
         <i
@@ -293,6 +332,7 @@ function Navbar() {
         </h2>
       </div>
     )}
+    
 
     {complexDropdownItems.includes(menuItems[openSubMenuIndex])
       ? menuData
