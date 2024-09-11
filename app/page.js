@@ -3,7 +3,7 @@ import logo from "../app/public/logo.png";
 
 export default function Home() {
   return (
-    <div className="relative h-[80vh] lg:h-screen bg-white">
+    <div className="relative h-[80vh] lg:h-screen bg-[#C8CACC]  hover:bg-white">
       <div className="flex flex-col items-center justify-center  h-[90vh] lg:h-screen px-4 py-16">
         <div className="flex flex-col items-center md:flex-row md:justify-center md:space-x-4">
           <div className="flex items-center space-x-2">
