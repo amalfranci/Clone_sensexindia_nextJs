@@ -109,7 +109,7 @@ function Navbar() {
   };
 
   return (
-    <div className="fixed top-0 left-0 z-50 w-full bg-white shadow-md ">
+    <div className="fixed top-0 left-0 z-50 w-full bg-white shadow-md " >
       <main className="bg-[#F2F4F7] font-inherit text-inherit font-medium leading-inherit text-[#0C0F13] capitalize pt-12 pl-[50px] pr-[10px]   h-[60px] lg:h-full xl:h-full 2xl:h-full">
         <ul className="flex-wrap items-center hidden space-x-3 text-lg lg:flex pb-11">
           {menuItems.map((item, index) => (
