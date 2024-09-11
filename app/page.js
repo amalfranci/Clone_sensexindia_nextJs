@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from '../app/public/logo.png';
+import logo from "../app/public/logo.png";
 
 export default function Home() {
   return (
@@ -7,11 +7,7 @@ export default function Home() {
       <div className="flex flex-col items-center justify-center  h-[90vh] lg:h-screen px-4 py-16">
         <div className="flex flex-col items-center md:flex-row md:justify-center md:space-x-4">
           <div className="flex items-center space-x-2">
-            <Image
-              src={logo}
-              alt="Logo"
-              width={65}
-            />
+            <Image src={logo} alt="Logo" width={65} />
             <h1 className="text-xl font-bold text-gray-800 sm:text-2xl md:text-3xl">
               SENSEXINDIA<span className="text-blue-500">.IN</span>
               <p className="text-base font-normal text-gray-500 sm:text-lg md:text-xl">
