@@ -1,3 +1,4 @@
+import Calculate from '../public/Calcul/cal.png';
 const  Calculators = [
     { 
       title: "Valuation Models", 
@@ -26,8 +27,16 @@ const  Calculators = [
        
    
       ]
+    },
+    { 
+      title: "", 
+      links: [
+        { name: "", image:Calculate  },
+    
+       
+   
+      ]
     }
   ];
   
   export default Calculators;
-  

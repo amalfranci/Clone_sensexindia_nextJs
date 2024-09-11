@@ -136,31 +136,42 @@ function Navbar() {
               </span>
 
               {openIndex === index && (
-                <div className="absolute mt-2 w-[700px]  bg-white text-black top-full p-1 rounded-lg shadow-lg overflow-hidden z-10">
-                  <hr className="w-full h-0.5 bg-blue-400 border-0 rounded "></hr>
+                <div>
+                 
 
                   {complexDropdownItems.includes(item) ? (
                     menuData
                       .filter((menu) => menu.name === item)
                       .map((menu, menuIndex) => (
+                        
+                        <div className="absolute mt-2  w-[700px]  bg-white text-black  p-1 rounded-lg shadow-lg overflow-hidden z-10">
+                        <hr className="w-full h-0.5 bg-blue-400 border-0 rounded "></hr>
                         <div
                           key={menuIndex}
                           className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2"
                         >
                           {menu.content.map((section, sectionIndex) => (
+                            
                             <div key={sectionIndex} className="w-full">
                               <h4 className="mb-2 font-medium underline decoration-blue-500 underline-offset-8">
                                 {section.title}
                               </h4>
                               <ul>
                                 {section.links.map((link, linkIndex) => (
+                                  
                                   <li
                                     key={linkIndex}
                                     className="flex items-center mb-2 text-sm font-normal"
                                   >
-                                    <i
-                                      className={`${link.icon} mr-2 text-blue-600 `}
-                                    ></i>
+                                   {link.icon ? (
+                        <i className={`${link.icon} mr-2 text-blue-600`}></i>
+                      ) : (
+                        <Image
+                          src={link.image}
+                          alt={link.name}
+                          className="mr-2 h-60 w-60"
+                        />
+                      )}
                                     <a className="ml-2 cursor-pointer hover:text-blue-500 ">{link.name}</a>
                                   </li>
                                 ))}
@@ -168,10 +179,13 @@ function Navbar() {
                             </div>
                           ))}
                         </div>
+                        </div>
                       ))
                   ) : normalDropdownItems.includes(item) ? (
                     NormalMenuData.filter((menu) => menu.name === item).map(
                       (menu, menuIndex) => (
+                        <div className="absolute mt-2 w-[400px]  bg-white text-black top-full p-1 rounded-lg shadow-lg overflow-hidden z-10">
+                        <hr className="w-full h-0.5 bg-blue-400 border-0 rounded "></hr>
                         <div
                           key={menuIndex}
                           className="grid grid-cols-1 gap-4 p-4 text-sm md:grid-cols-1"
@@ -191,6 +205,7 @@ function Navbar() {
             </li>
                             ))}
                           </ul>
+                        </div>
                         </div>
                       )
                     )
@@ -350,7 +365,15 @@ function Navbar() {
                         key={linkIndex}
                         className="flex items-center mb-2 text-sm font-normal"
                       >
+                    {link.icon ? (
                         <i className={`${link.icon} mr-2 text-blue-600`}></i>
+                      ) : (
+                        <Image
+                          src={link.image}
+                          alt={link.name}
+                          className="mr-2 h-60 w-60"
+                        />
+                      )}
                         <a className="ml-2 cursor-pointer hover:text-blue-500">
                           {link.name}
                         </a>
@@ -366,11 +389,24 @@ function Navbar() {
           (menu) => menu.name === menuItems[openSubMenuIndex]
         ).map((menu, menuIndex) => (
           <div key={menuIndex} className="grid grid-cols-1 gap-4 p-4">
-            {menu.content.map((link, linkIndex) => (
-              <div key={linkIndex}>
-                <a className="cursor-pointer">{link.name}</a>
-              </div>
-            ))}
+          <ul>
+              {menu.content.map((link, linkIndex) => (
+                <li key={linkIndex} className="flex items-center mb-2">
+                  {link.icon ? (
+                    <i className={`${link.icon} mr-2 text-blue-600`}></i>
+                  ) : (
+                    <Image
+                      src={link.image}
+                      alt={link.name}
+                      className="w-6 h-6 mr-2"
+                    />
+                  )}
+                  <a className="ml-2 font-normal cursor-pointer hover:text-blue-500">
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         ))
       : ""}
