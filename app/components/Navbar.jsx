@@ -133,10 +133,10 @@ function Navbar() {
                     ? menuData
                         .filter((menu) => menu.name === item)
                         .map((menu, menuIndex) => (
-                          <div className="absolute mt-2  w-[700px]  bg-white text-black  p-1 rounded-lg shadow-lg overflow-hidden z-10">
+                          <div  key={menuIndex} className="absolute mt-2  w-[700px]  bg-white text-black  p-1 rounded-lg shadow-lg overflow-hidden z-10">
                             <hr className="w-full h-0.5 bg-blue-400 border-0 rounded "></hr>
                             <div
-                              key={menuIndex}
+                             
                               className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2"
                             >
                               {menu.content.map((section, sectionIndex) => (
@@ -175,10 +175,10 @@ function Navbar() {
                     : normalDropdownItems.includes(item)
                     ? NormalMenuData.filter((menu) => menu.name === item).map(
                         (menu, menuIndex) => (
-                          <div className="absolute mt-2 w-[400px]  bg-white text-black top-full p-1 rounded-lg shadow-lg overflow-hidden z-10">
+                          <div  key={menuIndex} className="absolute mt-2 w-[400px]  bg-white text-black top-full p-1 rounded-lg shadow-lg overflow-hidden z-10">
                             <hr className="w-full h-0.5 bg-blue-400 border-0 rounded "></hr>
                             <div
-                              key={menuIndex}
+                             
                               className="grid grid-cols-1 gap-4 p-4 text-sm md:grid-cols-1"
                             >
                               <ul>
